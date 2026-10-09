@@ -1,11 +1,6 @@
-// === IR Sensor + PID Line Follower (Final Fixed Version) ===
-
-// === IR SENSOR SETTINGS ===
 const int sensorPins[6] = {A0, A1, A2, A3, A4, A5};
-// If your leftmost sensor is A0 and rightmost is A5, keep weights as below:
 const int sensorWeights[6] = {40, 10, 2, -2, -10, -40};
 
-// === MOTOR PINS ===
 #define IN1 6 
 #define IN2 10  
 #define IN3 11 
@@ -94,7 +89,7 @@ void setup() {
   }
 
   pinMode(13, OUTPUT);
-  pinMode(2, INPUT); // Optional start button
+  pinMode(2, INPUT); 
 
   calibrateSensors();
 
@@ -121,12 +116,12 @@ void loop() {
   if (activeCount > 0) {
     error = (float)weightedSum / activeCount;
   } else {
-    error = previousError;  // Line lost
+    error = previousError;  
   }
 
   integral += error;
   derivative = error - previousError;
-  float correction = Kp * error + Ki * integral + Kd * derivative; // yrodha valeur ynajem yakrah pont h
+  float correction = Kp * error + Ki * integral + Kd * derivative; 
 
   int leftSpeed = motorSpeed - correction;
   int rightSpeed = motorSpeed + correction;
